@@ -125,7 +125,7 @@ onSuccess: function (user) {
   }
   
 // Protected Route component for admin routes
-  const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children }) => {
     const { isAuthenticated } = useSelector((state) => state.user);
     const location = window.location.pathname + window.location.search;
     
