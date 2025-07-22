@@ -1,67 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import blogsService from "@/services/api/blogsService";
 
 const Resources = () => {
-  const resources = [
-    {
-      id: 1,
-      title: "The Complete Guide to AI for Wellness Practices",
-      description: "Everything you need to know about implementing conversational AI in your practice.",
-      category: "Guide",
-      readTime: "15 min read",
-      icon: "BookOpen"
-    },
-    {
-      id: 2,
-      title: "5 Ways AI Can Reduce Patient No-Shows",
-      description: "Proven strategies for using AI assistants to improve appointment attendance.",
-      category: "Best Practices",
-      readTime: "8 min read",
-      icon: "Calendar"
-    },
-    {
-      id: 3,
-      title: "HIPAA Compliance for AI in Healthcare",
-      description: "Understanding privacy requirements when implementing AI in wellness practices.",
-      category: "Compliance",
-      readTime: "12 min read",
-      icon: "Shield"
-    },
-    {
-      id: 4,
-      title: "ROI Calculator: AI Marketing for Wellness",
-      description: "Calculate the potential return on investment for AI marketing in your practice.",
-      category: "Tool",
-      readTime: "5 min use",
-      icon: "Calculator"
-    },
-    {
-      id: 5,
-      title: "Patient Engagement Trends in 2024",
-      description: "Latest research on how patients prefer to interact with wellness practices.",
-      category: "Research",
-      readTime: "10 min read",
-      icon: "TrendingUp"
-    },
-    {
-      id: 6,
-      title: "Setting Up Your First AI Assistant",
-      description: "Step-by-step guide to launching your practice's AI assistant in 48 hours.",
-      category: "Tutorial",
-      readTime: "20 min read",
-      icon: "Settings"
-    }
-  ];
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = ["All", "Guide", "Best Practices", "Compliance", "Tool", "Research", "Tutorial"];
-  const [selectedCategory, setSelectedCategory] = React.useState("All");
+
+  const loadBlogs = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      
+      const blogsData = await blogsService.getAll();
+      setBlogs(blogsData);
+    } catch (err) {
+      setError("Failed to load blog posts. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadBlogs();
+  }, []);
 
   const filteredResources = selectedCategory === "All" 
-    ? resources 
-    : resources.filter(resource => resource.category === selectedCategory);
+    ? blogs 
+    : blogs.filter(blog => blog.category === selectedCategory);
+
+  if (loading) {
+    return <Loading type="page" />;
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Error message={error} onRetry={loadBlogs} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -111,9 +97,9 @@ const Resources = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredResources.map((resource, index) => (
+{filteredResources.map((resource, index) => (
               <motion.div
-                key={resource.id}
+                key={resource.Id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -142,9 +128,12 @@ const Resources = () => {
                       <ApperIcon name="Clock" className="w-4 h-4 mr-1" />
                       {resource.readTime}
                     </span>
-                    <button className="text-primary hover:text-secondary transition-colors font-medium text-sm">
+                    <Link 
+                      to={`/resources/${resource.Id}`}
+                      className="text-primary hover:text-secondary transition-colors font-medium text-sm"
+                    >
                       Read More
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
