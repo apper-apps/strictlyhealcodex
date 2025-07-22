@@ -95,6 +95,78 @@
   border-radius: 3px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+:::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* React Quill Editor Styling */
+.ql-editor {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 300px;
+}
+
+.ql-editor h1, .ql-editor h2, .ql-editor h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+}
+
+.ql-toolbar {
+  border-top: 1px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.ql-container {
+  border-bottom: 1px solid #e2e8f0;
+  border-left: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+}
+
+/* Blog Content Styling */
+.blog-content h1, .blog-content h2, .blog-content h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content h1 { font-size: 2rem; }
+.blog-content h2 { font-size: 1.5rem; }
+.blog-content h3 { font-size: 1.25rem; }
+
+.blog-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.blog-content ul, .blog-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-content a {
+  color: #2C5F8D;
+  text-decoration: underline;
+}
+
+.blog-content a:hover {
+  color: #6B9BD1;
+}
+
+.blog-content strong {
+  font-weight: 600;
+}
+
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
 }

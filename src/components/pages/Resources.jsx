@@ -72,27 +72,33 @@ const Resources = () => {
         </div>
       </section>
 
-      {/* Filter Categories */}
+{/* Filter Categories and CMS Access */}
       <section className="py-8 border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-4 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedCategory === category
-                    ? "bg-primary text-white"
-                    : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+            <div className="flex flex-wrap gap-4 justify-center">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    selectedCategory === category
+                      ? "bg-primary text-white"
+                      : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            <Link to="/cms">
+              <Button variant="primary" icon="Settings" className="whitespace-nowrap">
+                Manage Blogs
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
-
       {/* Resources Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,18 +128,26 @@ const Resources = () => {
                   <p className="text-neutral-600 mb-4 leading-relaxed">
                     {resource.description}
                   </p>
-                  
-                  <div className="flex items-center justify-between">
+<div className="flex items-center justify-between">
                     <span className="text-sm text-neutral-500 flex items-center">
                       <ApperIcon name="Clock" className="w-4 h-4 mr-1" />
                       {resource.readTime}
                     </span>
-                    <Link 
-                      to={`/resources/${resource.Id}`}
-                      className="text-primary hover:text-secondary transition-colors font-medium text-sm"
-                    >
-                      Read More
-                    </Link>
+                    <div className="flex items-center gap-2">
+                      <Link 
+                        to={`/cms/edit/${resource.Id}`}
+                        className="text-neutral-500 hover:text-primary transition-colors"
+                        title="Edit Blog"
+                      >
+                        <ApperIcon name="Edit" className="w-4 h-4" />
+                      </Link>
+                      <Link 
+                        to={`/cms/blog/${resource.Id}`}
+                        className="text-primary hover:text-secondary transition-colors font-medium text-sm"
+                      >
+                        Read More
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>

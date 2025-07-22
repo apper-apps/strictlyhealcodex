@@ -12,6 +12,9 @@ import About from "@/components/pages/About";
 import Resources from "@/components/pages/Resources";
 import ServiceDetail from "@/components/pages/ServiceDetail";
 import CaseStudies from "@/components/pages/CaseStudies";
+import BlogList from "@/components/pages/BlogList";
+import BlogEditor from "@/components/pages/BlogEditor";
+import BlogDetail from "@/components/pages/BlogDetail";
 function App() {
   return (
     <>
@@ -31,6 +34,10 @@ function App() {
           <Route path="contact" element={<Contact />} />
 <Route path="resources" element={<Resources />} />
           <Route path="resources/:blogId" element={<Resources />} />
+          <Route path="cms" element={<BlogList />} />
+          <Route path="cms/create" element={<BlogEditor />} />
+          <Route path="cms/edit/:blogId" element={<BlogEditor />} />
+          <Route path="cms/blog/:blogId" element={<BlogDetail />} />
           <Route path="about" element={<About />} />
         </Route>
       </Routes>
