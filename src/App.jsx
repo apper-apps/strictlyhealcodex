@@ -1,33 +1,34 @@
-import { createContext, useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { createContext, useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { setUser, clearUser } from './store/userSlice';
-import SEOLandingPage from "@/components/pages/SEOLandingPage";
-import Layout from "@/components/organisms/Layout";
-import IndustryDetail from "@/components/pages/IndustryDetail";
-import Industries from "@/components/pages/Industries";
-import Services from "@/components/pages/Services";
-import Contact from "@/components/pages/Contact";
-import Home from "@/components/pages/Home";
-import About from "@/components/pages/About";
-import Resources from "@/components/pages/Resources";
+import "@/index.css";
+import { clearUser, setUser } from "@/store/userSlice";
 import ServiceDetail from "@/components/pages/ServiceDetail";
-import CaseStudies from "@/components/pages/CaseStudies";
-import BlogList from "@/components/pages/BlogList";
-import BlogEditor from "@/components/pages/BlogEditor";
 import BlogDetail from "@/components/pages/BlogDetail";
-import Login from '@/components/pages/Login';
-import Signup from '@/components/pages/Signup';
-import Callback from '@/components/pages/Callback';
-import ErrorPage from '@/components/pages/ErrorPage';
-import ResetPassword from '@/components/pages/ResetPassword';
-import PromptPassword from '@/components/pages/PromptPassword';
+import Login from "@/components/pages/Login";
+import PromptPassword from "@/components/pages/PromptPassword";
+import Industries from "@/components/pages/Industries";
+import IndustryDetail from "@/components/pages/IndustryDetail";
+import ErrorPage from "@/components/pages/ErrorPage";
+import BlogList from "@/components/pages/BlogList";
+import SEOLandingPage from "@/components/pages/SEOLandingPage";
+import About from "@/components/pages/About";
+import Signup from "@/components/pages/Signup";
+import Resources from "@/components/pages/Resources";
+import Home from "@/components/pages/Home";
+import Callback from "@/components/pages/Callback";
+import Contact from "@/components/pages/Contact";
+import Services from "@/components/pages/Services";
+import ResetPassword from "@/components/pages/ResetPassword";
+import CaseStudies from "@/components/pages/CaseStudies";
+import BlogEditor from "@/components/pages/BlogEditor";
+import Layout from "@/components/organisms/Layout";
 
 // Create auth context
 export const AuthContext = createContext(null);
 
-function App() {
+function AppComponent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -197,4 +198,4 @@ const ProtectedRoute = ({ children }) => {
   );
 }
 
-export default App;
+export default AppComponent;
